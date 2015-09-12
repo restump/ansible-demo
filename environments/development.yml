@@ -1,0 +1,3 @@
+mongo_hostname: 172.16.41.25
+mongo_database: development
+myapp_version: 1

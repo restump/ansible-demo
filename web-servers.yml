@@ -1,0 +1,13 @@
+---
+- hosts: web-servers
+
+  vars:
+    ansible_ssh_user: vagrant
+    ansible_ssh_private_key_file: ssh-key/vagrant
+    environment: development
+    
+  vars_files:
+    - "environments/{{ environment }}.yml"
+        
+  roles:
+    - { role: 'webserver' }

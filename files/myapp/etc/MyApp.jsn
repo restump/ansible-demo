@@ -1,0 +1,11 @@
+{
+	"database": {
+		"host": "172.16.41.25",
+		"name": "development"
+	},
+	"hypnotoad": {
+		"listen": [
+			"http://*:80"
+		]
+	}
+}

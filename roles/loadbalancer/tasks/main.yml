@@ -1,0 +1,17 @@
+---
+# tasks file for loadbalancer
+
+- name: Update APT cache
+  apt: update_cache=yes
+
+- name: Install HAProxy
+  apt: name=haproxy update_cache=no state=latest
+  
+- name: Enable HAProxy Service
+  replace: dest=/etc/default/haproxy regexp='^ENABLED=0$' replace='ENABLED=1'
+
+- name: Update HAProxy Configuration
+  template: src=haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg mode=0644 force=yes
+  notify:
+    - restart haproxy
+  

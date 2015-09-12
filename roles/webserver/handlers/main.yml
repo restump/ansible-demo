@@ -1,0 +1,8 @@
+---
+# handlers file for webserver
+
+# Some oddness with the hypnotoad hot restart...? Try clearing hypnotoad pid with script..
+# Fixed with pid_file in the mojo app configuration (problem with local pid file?)
+- name: Restart MyApp
+  command: /usr/bin/hypnotoad MyApp chdir=/opt/myapp
+  sudo: no

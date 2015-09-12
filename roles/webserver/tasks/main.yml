@@ -1,0 +1,31 @@
+---
+# tasks file for webserver
+
+- name: Update APT cache
+  apt: update_cache=yes
+  
+- name: Install cpanm
+  apt: name=cpanminus update_cache=no state=latest
+  
+- name: Install Perl Mojo
+  apt: name=libmojolicious-perl update_cache=no state=latest
+  
+- name: Install File::Copy::Recursive
+  cpanm: name=File::Copy::Recursive notest=yes
+  
+- name: Install IO::Socket::IP
+  cpanm: name=IO::Socket::IP notest=yes
+  
+- name: Install Mango
+  cpanm: name=Mango notest=yes
+  
+- name: Install Git
+  apt: name=git update_cache=no state=latest
+  
+- name: Install MyApp
+  unarchive: src="files/MyApp-v{{ myapp_version }}.tgz" dest="/opt" owner=vagrant group=root mode=0755
+
+- name: MyApp configuration
+  template: src=MyApp.jsn.j2 dest=/opt/myapp/etc/MyApp.jsn mode=0644 force=yes
+  notify: Restart MyApp
+
